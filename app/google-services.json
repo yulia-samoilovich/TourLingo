@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1094779643248",
+    "firebase_url": "https://tourlingo-eea40-default-rtdb.firebaseio.com",
+    "project_id": "tourlingo-eea40",
+    "storage_bucket": "tourlingo-eea40.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094779643248:android:60249f351b37bf1101dbb5",
+        "android_client_info": {
+          "package_name": "com.example.tourlingo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094779643248-215326re00mmuef6lm3cpms4u4haa4p9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCb1LQ9w8NaQWGEwUxLfgIma2pA9vikhE8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1094779643248-215326re00mmuef6lm3cpms4u4haa4p9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
