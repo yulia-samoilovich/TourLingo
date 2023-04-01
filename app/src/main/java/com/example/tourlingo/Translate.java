@@ -52,8 +52,6 @@ public class Translate extends AppCompatActivity implements View.OnClickListener
         tvIncorrect2.setOnClickListener(this);
         imWrong = findViewById(R.id.imWrong);
         imRight = findViewById(R.id.imRight);
-        imWrong.setOnClickListener(this);
-        imRight.setOnClickListener(this);
 
         tourLingoDb = FirebaseDatabase
                 .getInstance()
@@ -85,10 +83,10 @@ public class Translate extends AppCompatActivity implements View.OnClickListener
                     @Override
                     public void run() {
                         imRight.setVisibility(View.INVISIBLE);
+                        updateSentence();
                     }
                 }, 1000);
                 points++;
-                updateSentence();
                 break;
 
             case R.id.tvIncorrect1:
@@ -117,11 +115,6 @@ public class Translate extends AppCompatActivity implements View.OnClickListener
                     String getOption2 = snapshot.child("option2").getValue().toString();
 
                     questionList.add(new Sentence(getQuestion, getAnswer, getOption1, getOption2));
-                    //Collections.shuffle(questionList);
-
-//                    options.add(new Sentence(getAnswer, getOption1, getOption2));
-//                    Collections.shuffle(options);
-//                    Log.d("options", String.valueOf(options));
 
                     for (Sentence oneSentence : questionList) {
                         tvSentence.setText(oneSentence.getSentence());

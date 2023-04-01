@@ -27,7 +27,7 @@ public class Learn extends AppCompatActivity implements View.OnClickListener{
         btnTranslate.setOnClickListener(this);
         btnInsert.setOnClickListener(this);
         btnMatchT.setOnClickListener(this);
-        btnMatchT.setOnClickListener(this);
+        btnMatchP.setOnClickListener(this);
     }
 
     @Override
@@ -43,6 +43,9 @@ public class Learn extends AppCompatActivity implements View.OnClickListener{
                 Intent i2 = new Intent(this, Translate.class);
                 startActivity(i2);
                 break;
+            case R.id.btnMatchP:
+                Intent i3 = new Intent(this, MatchPicture.class);
+                startActivity(i3);
         }
     }
 }
