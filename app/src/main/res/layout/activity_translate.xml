@@ -10,9 +10,10 @@
 
     <TextView
         android:id="@+id/tvSentence"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="......."
+        android:textAlignment="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,50 +21,46 @@
         android:textColor="#3F51B5"
         android:textStyle="bold"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+        />
 
     <TextView
         android:id="@+id/tvCorrect"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="correct translation"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvSentence"
+        android:textAlignment="center"
         android:layout_marginTop="50dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
         android:textSize="20sp"
         android:clickable="true"
         android:background="@drawable/orange_back"/>
 
     <TextView
         android:id="@+id/tvIncorrect1"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="incorrect translation1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@id/tvCorrect"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
         android:textSize="20sp"
         android:clickable="true"
         android:background="@drawable/orange_back"/>
 
     <TextView
         android:id="@+id/tvIncorrect2"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="incorrect translation2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvIncorrect1"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:textAlignment="center"
         android:textSize="20sp"
         android:clickable="true"
         android:background="@drawable/orange_back"/>
@@ -76,7 +73,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvIncorrect2"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:visibility="invisible"/>
 
     <ImageView
@@ -87,7 +84,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvIncorrect2"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:visibility="invisible"/>
     />
 
