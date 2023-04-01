@@ -49,6 +49,7 @@ public class MatchPicture extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_picture);
         initialize();
+        updatePicture();
     }
 
     private void initialize() {
@@ -68,6 +69,19 @@ public class MatchPicture extends AppCompatActivity implements View.OnClickListe
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
+        registerActResLauncher();
+    }
+
+    private void registerActResLauncher() {
+        actResLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        getPhoto(result);
+                    }
+                }
+        );
     }
 
     private void getPhoto(ActivityResult result) {
@@ -99,15 +113,6 @@ public class MatchPicture extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void run() {
                         imRight.setVisibility(View.INVISIBLE);
-                        actResLauncher = registerForActivityResult(
-                                new ActivityResultContracts.StartActivityForResult(),
-                                new ActivityResultCallback<ActivityResult>() {
-                                    @Override
-                                    public void onActivityResult(ActivityResult result) {
-                                        getPhoto(result);
-                                    }
-                                }
-                        );
                         updatePicture();
                     }
                 }, 1000);
