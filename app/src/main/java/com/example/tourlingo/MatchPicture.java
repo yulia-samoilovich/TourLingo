@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -158,5 +159,28 @@ public class MatchPicture extends AppCompatActivity implements View.OnClickListe
 
                     }
                 });
+
+        tourLingoDb
+                .child(String.valueOf(count)).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String urlPhoto = snapshot
+                                .child("picture")
+                                .getValue()
+                                .toString();
+
+                        Picasso
+                                .with(MatchPicture.this)
+                                .load(urlPhoto)
+                                .placeholder(R.drawable.loading)
+                                .into(imLoad);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
+
 }
