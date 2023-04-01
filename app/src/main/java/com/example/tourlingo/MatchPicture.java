@@ -37,10 +37,9 @@ public class MatchPicture extends AppCompatActivity implements View.OnClickListe
     ImageView imRight, imWrong, imLoad;
     DatabaseReference tourLingoDb;
     FirebaseStorage storage;
-    StorageReference storageReference,sRef;
+    StorageReference storageReference;
     ActivityResultLauncher actResLauncher;
     Uri filePath;
-    ProgressDialog prDialog;
     int count = 0;
     int points = 0;
     List<Picture> pictureList = new ArrayList<>();
@@ -151,29 +150,17 @@ public class MatchPicture extends AppCompatActivity implements View.OnClickListe
                                 tvOption1.setText(onePicture.getOption1());
                                 tvOption2.setText(onePicture.getOption2());
                             }
+                            String urlPhoto = snapshot
+                                    .child("picture")
+                                    .getValue()
+                                    .toString();
+
+                            Picasso
+                                    .with(MatchPicture.this)
+                                    .load(urlPhoto)
+                                    .placeholder(R.drawable.loading)
+                                    .into(imLoad);
                         }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-        tourLingoDb
-                .child(String.valueOf(count)).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String urlPhoto = snapshot
-                                .child("picture")
-                                .getValue()
-                                .toString();
-
-                        Picasso
-                                .with(MatchPicture.this)
-                                .load(urlPhoto)
-                                .placeholder(R.drawable.loading)
-                                .into(imLoad);
                     }
 
                     @Override
