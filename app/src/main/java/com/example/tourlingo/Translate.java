@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,10 +28,10 @@ import java.util.Map;
 
 public class Translate extends AppCompatActivity implements View.OnClickListener{
     TextView tvSentence, tvCorrect, tvIncorrect1, tvIncorrect2;
+    TextView tvPoints;
     ImageView imRight, imWrong;
     DatabaseReference tourLingoDb;
     List<Sentence> questionList = new ArrayList<>();
-    List<Sentence>options = new ArrayList<>();
     int count = 0;
     int points = 0;
 
@@ -43,6 +44,7 @@ public class Translate extends AppCompatActivity implements View.OnClickListener
     }
 
     private void initialize() {
+        tvPoints = findViewById(R.id.tvPoints);
         tvSentence = findViewById(R.id.tvSentence);
         tvCorrect = findViewById(R.id.tvCorrect);
         tvIncorrect1 = findViewById(R.id.tvIncorrect1);
@@ -86,7 +88,8 @@ public class Translate extends AppCompatActivity implements View.OnClickListener
                         updateSentence();
                     }
                 }, 1000);
-                points++;
+                points = points + 10;
+                updateScore();
                 break;
 
             case R.id.tvIncorrect1:
@@ -98,8 +101,14 @@ public class Translate extends AppCompatActivity implements View.OnClickListener
                         imWrong.setVisibility(View.INVISIBLE);
                     }
                 }, 1000);
+                points = points - 5;
+                updateScore();
                 break;
         }
+    }
+
+    private void updateScore() {
+        tvPoints.setText("" + points);
     }
 
     private void updateSentence() {
