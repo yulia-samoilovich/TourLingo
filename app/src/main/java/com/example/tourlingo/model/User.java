@@ -7,6 +7,11 @@ public class User implements Serializable {
     private String name;
     private String password;
     private String email;
+    private int points;
+
+    public User(int points) {
+        this.points = points;
+    }
 
     public User(int id, String name, String password, String email) {
         this.id = id;
@@ -41,5 +46,13 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 }

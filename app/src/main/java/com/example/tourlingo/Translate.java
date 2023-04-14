@@ -2,13 +2,11 @@ package com.example.tourlingo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +32,7 @@ public class Translate extends AppCompatActivity implements View.OnClickListener
     List<Sentence> questionList = new ArrayList<>();
     int count = 0;
     int points = 0;
+    int minutes = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,19 +59,19 @@ public class Translate extends AppCompatActivity implements View.OnClickListener
                 .getReference("sentences");
     }
 
-//    private void totalTime(int minutes){
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//               String finalMinutes = String.valueOf(minutes);
-//
-//               if(finalMinutes.length() == 1){
-//                   finalMinutes = "0"+finalMinutes;
-//               }
-//
-//            }
-//        });
-//    }
+    private void totalTime(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+               String finalMinutes = String.valueOf(minutes);
+
+               if(finalMinutes.length() == 1){
+                   finalMinutes = "0"+finalMinutes;
+               }
+
+            }
+        });
+    }
 
     @Override
     public void onClick(View view) {
@@ -90,6 +89,7 @@ public class Translate extends AppCompatActivity implements View.OnClickListener
                 }, 1000);
                 points = points + 10;
                 updateScore();
+                totalTime();
                 break;
 
             case R.id.tvIncorrect1:
@@ -103,6 +103,7 @@ public class Translate extends AppCompatActivity implements View.OnClickListener
                 }, 1000);
                 points = points - 5;
                 updateScore();
+                totalTime();
                 break;
         }
     }
@@ -113,31 +114,41 @@ public class Translate extends AppCompatActivity implements View.OnClickListener
 
     private void updateSentence() {
         count++;
-        tourLingoDb
-                .child(String.valueOf(count)).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) {
-                    String getQuestion = snapshot.child("sentence").getValue().toString();
-                    String getAnswer = snapshot.child("answer").getValue().toString();
-                    String getOption1 = snapshot.child("option1").getValue().toString();
-                    String getOption2 = snapshot.child("option2").getValue().toString();
+        if(count > 5){
+            Intent i = new Intent(this, ProgressReview.class);
+            i.putExtra("time", String.valueOf(minutes));
+            i.putExtra("words", String.valueOf(count-1));
+            i.putExtra("points", String.valueOf(points));
+            startActivity(i);
+        }
+        else{
+            tourLingoDb
+                    .child(String.valueOf(count)).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists()) {
+                                String getQuestion = snapshot.child("sentence").getValue().toString();
+                                String getAnswer = snapshot.child("answer").getValue().toString();
+                                String getOption1 = snapshot.child("option1").getValue().toString();
+                                String getOption2 = snapshot.child("option2").getValue().toString();
 
-                    questionList.add(new Sentence(getQuestion, getAnswer, getOption1, getOption2));
+                                questionList.add(new Sentence(getQuestion, getAnswer, getOption1, getOption2));
 
-                    for (Sentence oneSentence : questionList) {
-                        tvSentence.setText(oneSentence.getSentence());
-                        tvCorrect.setText(oneSentence.getAnswer());
-                        tvIncorrect1.setText(oneSentence.getOption1());
-                        tvIncorrect2.setText(oneSentence.getOption2());
-                    }
-                }
-            }
+                                for (Sentence oneSentence : questionList) {
+                                    tvSentence.setText(oneSentence.getSentence());
+                                    tvCorrect.setText(oneSentence.getAnswer());
+                                    tvIncorrect1.setText(oneSentence.getOption1());
+                                    tvIncorrect2.setText(oneSentence.getOption2());
+                                }
+                            }
+                        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                        }
+                    });
+        }
     }
+
 }

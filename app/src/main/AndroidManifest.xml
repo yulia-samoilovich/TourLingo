@@ -15,6 +15,9 @@
         android:theme="@style/TourLingo"
         tools:targetApi="31">
         <activity
+            android:name=".ProgressReview"
+            android:exported="false" />
+        <activity
             android:name=".MatchPicture"
             android:exported="false" />
         <activity

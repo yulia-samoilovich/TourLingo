@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ import java.util.List;
 public class MatchPicture extends AppCompatActivity implements View.OnClickListener {
 
     TextView tvAnswer, tvOption1, tvOption2;
+    TextView tvPoints;
     ImageView imRight, imWrong, imLoad;
     DatabaseReference tourLingoDb;
     FirebaseStorage storage;
@@ -42,6 +44,7 @@ public class MatchPicture extends AppCompatActivity implements View.OnClickListe
     Uri filePath;
     int count = 0;
     int points = 0;
+    int minutes = 0;
     List<Picture> pictureList = new ArrayList<>();
 
     @Override
@@ -56,6 +59,7 @@ public class MatchPicture extends AppCompatActivity implements View.OnClickListe
         tvAnswer = findViewById(R.id.tvAnswer);
         tvOption1 = findViewById(R.id.tvOption1);
         tvOption2 = findViewById(R.id.tvOption2);
+        tvPoints = findViewById(R.id.tvPoints);
         tvAnswer.setOnClickListener(this);
         tvOption1.setOnClickListener(this);
         tvOption2.setOnClickListener(this);
@@ -116,7 +120,9 @@ public class MatchPicture extends AppCompatActivity implements View.OnClickListe
                         updatePicture();
                     }
                 }, 1000);
-                points++;
+                points = points + 10;
+                updateScore();
+                totalTime();
                 break;
 
             case R.id.tvOption1:
@@ -128,46 +134,76 @@ public class MatchPicture extends AppCompatActivity implements View.OnClickListe
                         imWrong.setVisibility(View.INVISIBLE);
                     }
                 }, 1000);
+                points = points - 5;
+                updateScore();
+                totalTime();
                 break;
         }
     }
 
+    private void totalTime(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                String finalMinutes = String.valueOf(minutes);
+
+                if(finalMinutes.length() == 1){
+                    finalMinutes = "0"+finalMinutes;
+                }
+
+            }
+        });
+    }
+
+    private void updateScore() {
+        tvPoints.setText("" + points);
+    }
+
     private void updatePicture() {
         count++;
-        tourLingoDb
-                .child(String.valueOf(count)).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()) {
-                            String getAnswer = snapshot.child("answer").getValue().toString();
-                            String getOption1 = snapshot.child("option1").getValue().toString();
-                            String getOption2 = snapshot.child("option2").getValue().toString();
+        if(count > 5){
+            Intent i = new Intent(this, ProgressReview.class);
+            i.putExtra("time", String.valueOf(minutes));
+            i.putExtra("words", String.valueOf(count-1));
+            i.putExtra("points", String.valueOf(points));
+            startActivity(i);
+        }
+        else{
+            tourLingoDb
+                    .child(String.valueOf(count)).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                String getAnswer = snapshot.child("answer").getValue().toString();
+                                String getOption1 = snapshot.child("option1").getValue().toString();
+                                String getOption2 = snapshot.child("option2").getValue().toString();
 
-                            pictureList.add(new Picture(getAnswer, getOption1, getOption2));
+                                pictureList.add(new Picture(getAnswer, getOption1, getOption2));
 
-                            for (Picture onePicture : pictureList) {
-                                tvAnswer.setText(onePicture.getAnswer());
-                                tvOption1.setText(onePicture.getOption1());
-                                tvOption2.setText(onePicture.getOption2());
+                                for (Picture onePicture : pictureList) {
+                                    tvAnswer.setText(onePicture.getAnswer());
+                                    tvOption1.setText(onePicture.getOption1());
+                                    tvOption2.setText(onePicture.getOption2());
+                                }
+                                String urlPhoto = snapshot
+                                        .child("picture")
+                                        .getValue()
+                                        .toString();
+
+                                Picasso
+                                        .with(MatchPicture.this)
+                                        .load(urlPhoto)
+                                        .placeholder(R.drawable.loading)
+                                        .into(imLoad);
                             }
-                            String urlPhoto = snapshot
-                                    .child("picture")
-                                    .getValue()
-                                    .toString();
-
-                            Picasso
-                                    .with(MatchPicture.this)
-                                    .load(urlPhoto)
-                                    .placeholder(R.drawable.loading)
-                                    .into(imLoad);
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
+                        }
+                    });
+        }
     }
 
 }

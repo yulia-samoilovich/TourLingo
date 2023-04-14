@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProgressReview">
+
+    <ImageView
+        android:id="@+id/imLogo"
+        android:layout_width="115dp"
+        android:layout_height="120dp"
+        android:src="@drawable/logo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tvTitle"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Progress Review"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/imLogo"
+        app:layout_constraintTop_toTopOf="@id/imLogo"
+        android:textSize="25sp"
+        android:layout_marginLeft="100dp"
+        android:textStyle="bold"
+        android:textColor="#3F51B5"/>
+
+    <ImageView
+        android:id="@+id/imTime"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/alarm_clock"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="110dp"
+        app:layout_constraintTop_toBottomOf="@id/imLogo"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/imTime"
+        app:layout_constraintBottom_toBottomOf="@id/imTime"
+        app:layout_constraintTop_toTopOf="@id/imTime"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#3042A6"
+        android:layout_marginLeft="10dp"
+        />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="minutes spent"
+        app:layout_constraintLeft_toLeftOf="@id/imTime"
+        app:layout_constraintTop_toBottomOf="@id/imTime"
+        android:textSize="18sp"/>
+
+    <ImageView
+        android:id="@+id/imWords"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/dictionary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="110dp"
+        app:layout_constraintTop_toBottomOf="@id/textView9"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/tvWords"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/imWords"
+        app:layout_constraintBottom_toBottomOf="@id/imWords"
+        app:layout_constraintTop_toTopOf="@id/imWords"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#3042A6"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="words studied"
+        app:layout_constraintLeft_toLeftOf="@id/imWords"
+        app:layout_constraintTop_toBottomOf="@id/imWords"
+        android:textSize="18sp"/>
+
+    <ImageView
+        android:id="@+id/imPoints"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/light"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="110dp"
+        app:layout_constraintTop_toBottomOf="@id/textView6"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/tvPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/imPoints"
+        app:layout_constraintBottom_toBottomOf="@id/imPoints"
+        app:layout_constraintTop_toTopOf="@id/imPoints"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#3042A6"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="points earned"
+        app:layout_constraintLeft_toLeftOf="@id/imPoints"
+        app:layout_constraintTop_toBottomOf="@id/imPoints"
+        android:textSize="18sp"/>
+
+    <FrameLayout
+        android:id="@+id/flFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavView"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav"
+        app:itemIconTint="#DC7B5C"
+        app:itemTextColor="#DC7B5C"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
