@@ -4,11 +4,32 @@ public class Picture {
     private String answer;
     private String option1;
     private String option2;
+    private long startTime, endTime;
+
+    public Picture(long startTime) {
+        this.startTime = startTime;
+    }
 
     public Picture(String answer, String option1, String option2) {
         this.answer = answer;
         this.option1 = option1;
         this.option2 = option2;
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
+    public long getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(long endTime) {
+        this.endTime = endTime;
     }
 
     public String getAnswer() {

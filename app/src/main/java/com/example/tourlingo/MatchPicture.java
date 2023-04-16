@@ -31,6 +31,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class MatchPicture extends AppCompatActivity implements View.OnClickListener {
 
@@ -46,6 +47,7 @@ public class MatchPicture extends AppCompatActivity implements View.OnClickListe
     int points = 0;
     int minutes = 0;
     List<Picture> pictureList = new ArrayList<>();
+    List<Picture> matchSessions = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class MatchPicture extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_match_picture);
         initialize();
         updatePicture();
+        startSession();
     }
 
     private void initialize() {
@@ -122,7 +125,6 @@ public class MatchPicture extends AppCompatActivity implements View.OnClickListe
                 }, 1000);
                 points = points + 10;
                 updateScore();
-                totalTime();
                 break;
 
             case R.id.tvOption1:
@@ -136,23 +138,30 @@ public class MatchPicture extends AppCompatActivity implements View.OnClickListe
                 }, 1000);
                 points = points - 5;
                 updateScore();
-                totalTime();
                 break;
         }
     }
 
-    private void totalTime(){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                String finalMinutes = String.valueOf(minutes);
+    private void startSession() {
+        long startTime = System.currentTimeMillis();
+        Picture session = new Picture(startTime);
+        matchSessions.add(session);
+    }
 
-                if(finalMinutes.length() == 1){
-                    finalMinutes = "0"+finalMinutes;
-                }
+    private void finishSession() {
+        long endTime = System.currentTimeMillis();
+        int lastIndex = matchSessions.size() - 1;
+        Picture lastSession = matchSessions.get(lastIndex);
+        lastSession.setEndTime(endTime);
+    }
 
-            }
-        });
+    private int calculateTotalMinutes() {
+        for (Picture session : matchSessions) {
+            long sessionTimeMillis = session.getEndTime() - session.getStartTime();
+            int sessionMinutes = (int) TimeUnit.MILLISECONDS.toMinutes(sessionTimeMillis);
+            minutes += sessionMinutes;
+        }
+        return minutes;
     }
 
     private void updateScore() {
@@ -162,6 +171,8 @@ public class MatchPicture extends AppCompatActivity implements View.OnClickListe
     private void updatePicture() {
         count++;
         if(count > 5){
+            finishSession();
+            calculateTotalMinutes();
             Intent i = new Intent(this, ProgressReview.class);
             i.putExtra("time", String.valueOf(minutes));
             i.putExtra("words", String.valueOf(count-1));

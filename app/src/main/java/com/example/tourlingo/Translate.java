@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class Translate extends AppCompatActivity implements View.OnClickListener{
     TextView tvSentence, tvCorrect, tvIncorrect1, tvIncorrect2;
@@ -30,6 +31,7 @@ public class Translate extends AppCompatActivity implements View.OnClickListener
     ImageView imRight, imWrong;
     DatabaseReference tourLingoDb;
     List<Sentence> questionList = new ArrayList<>();
+    List<Sentence> translateSessions = new ArrayList<>();
     int count = 0;
     int points = 0;
     int minutes = 0;
@@ -40,6 +42,7 @@ public class Translate extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_translate);
         initialize();
         updateSentence();
+        startSession();
     }
 
     private void initialize() {
@@ -59,20 +62,6 @@ public class Translate extends AppCompatActivity implements View.OnClickListener
                 .getReference("sentences");
     }
 
-    private void totalTime(){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-               String finalMinutes = String.valueOf(minutes);
-
-               if(finalMinutes.length() == 1){
-                   finalMinutes = "0"+finalMinutes;
-               }
-
-            }
-        });
-    }
-
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -89,7 +78,6 @@ public class Translate extends AppCompatActivity implements View.OnClickListener
                 }, 1000);
                 points = points + 10;
                 updateScore();
-                totalTime();
                 break;
 
             case R.id.tvIncorrect1:
@@ -103,9 +91,30 @@ public class Translate extends AppCompatActivity implements View.OnClickListener
                 }, 1000);
                 points = points - 5;
                 updateScore();
-                totalTime();
                 break;
         }
+    }
+
+    private void startSession() {
+        long startTime = System.currentTimeMillis();
+        Sentence session = new Sentence(startTime);
+        translateSessions.add(session);
+    }
+
+    private void finishSession() {
+        long endTime = System.currentTimeMillis();
+        int lastIndex = translateSessions.size() - 1;
+        Sentence lastSession = translateSessions.get(lastIndex);
+        lastSession.setEndTime(endTime);
+    }
+
+    private int calculateTotalMinutes() {
+        for (Sentence session : translateSessions) {
+            long sessionTimeMillis = session.getEndTime() - session.getStartTime();
+            int sessionMinutes = (int) TimeUnit.MILLISECONDS.toMinutes(sessionTimeMillis);
+            minutes += sessionMinutes;
+        }
+        return minutes;
     }
 
     private void updateScore() {
@@ -115,6 +124,8 @@ public class Translate extends AppCompatActivity implements View.OnClickListener
     private void updateSentence() {
         count++;
         if(count > 5){
+            finishSession();
+            calculateTotalMinutes();
             Intent i = new Intent(this, ProgressReview.class);
             i.putExtra("time", String.valueOf(minutes));
             i.putExtra("words", String.valueOf(count-1));
