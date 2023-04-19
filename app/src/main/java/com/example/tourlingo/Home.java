@@ -28,10 +28,10 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     private void initialize(){
         btnLearn = findViewById(R.id.btnLearn);
         btnLearn.setOnClickListener(this);
-//        btnProgress = findViewById(R.id.btnProgress);
-//        btnProgress.setOnClickListener(this);
-//        btnSocial.findViewById(R.id.btnSocial);
-//        btnSocial.setOnClickListener(this);
+        btnProgress = findViewById(R.id.btnProgress);
+        btnProgress.setOnClickListener(this);
+        btnSocial = findViewById(R.id.btnSocial);
+        btnSocial.setOnClickListener(this);
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
@@ -51,11 +51,27 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
             case R.id.btnLearn:
                 goLearn();
                 break;
+            case R.id.btnProgress:
+                goProgress();
+                break;
+            case R.id.btnSocial:
+                goSocial();
+                break;
         }
     }
 
     private void goLearn(){
         Intent i = new Intent(this, Learn.class);
+        startActivity(i);
+    }
+
+    private void goProgress() {
+        Intent i = new Intent(this, ProgressReview.class);
+        startActivity(i);
+    }
+
+    private void goSocial() {
+        Intent i = new Intent(this, Social.class);
         startActivity(i);
     }
 }

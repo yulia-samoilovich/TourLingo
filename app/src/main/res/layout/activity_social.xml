@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Social">
+
+
+    <ImageView
+        android:id="@+id/imLogo"
+        android:layout_width="250dp"
+        android:layout_height="120dp"
+        app:srcCompat="@drawable/social_logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <ImageView
+        android:id="@+id/imVisit"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/visit"
+        app:layout_constraintTop_toBottomOf="@id/imLogo"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/btnLocation"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:text="Select Location"
+        app:layout_constraintBottom_toBottomOf="@id/imVisit"
+        app:layout_constraintTop_toTopOf="@id/imVisit"
+        app:layout_constraintLeft_toRightOf="@id/imVisit"
+        android:layout_marginLeft="20dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button_selector"/>
+
+    <ImageView
+        android:id="@+id/imBuddy"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/buddy"
+        app:layout_constraintTop_toBottomOf="@id/btnLocation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/btnBuddy"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:text="Find Buddy"
+        app:layout_constraintBottom_toBottomOf="@id/imBuddy"
+        app:layout_constraintTop_toTopOf="@id/imBuddy"
+        app:layout_constraintLeft_toRightOf="@id/imBuddy"
+        android:layout_marginLeft="20dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button_selector"/>
+
+    <FrameLayout
+        android:id="@+id/flFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavView"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav"
+        app:itemIconTint="#DC7B5C"
+        app:itemTextColor="#DC7B5C"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
