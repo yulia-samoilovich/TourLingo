@@ -1,40 +1,60 @@
 package com.example.tourlingo;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class Location extends AppCompatActivity {
+public class Location extends AppCompatActivity implements View.OnClickListener {
+    Button btnMoscow, btnSeoul, btnVancouver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
+        initialize();
     }
 
-    public void openLocationActivity(View view) {
-        // 각 버튼 클릭 시 호출되는 메소드입니다.
-        // 클릭된 버튼의 id를 이용하여 다음 화면으로 넘어갑니다.
-        switch (view.getId()) {
-            case R.id.moscow_button:
-                startActivity(new Intent(this, Moscow.class));
+    private void initialize() {
+        btnMoscow = findViewById(R.id.btnMoscow);
+        btnMoscow.setOnClickListener(this);
+        btnSeoul = findViewById(R.id.btnSeoul);
+        btnSeoul.setOnClickListener(this);
+        btnVancouver = findViewById(R.id.btnVancouver);
+        btnVancouver.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        int vId = view.getId();
+
+        switch(vId){
+            case R.id.btnMoscow:
+                goMoscow();
                 break;
-            case R.id.seoul_button:
-                startActivity(new Intent(this, Seoul.class));
+            case R.id.btnSeoul:
+                goSeoul();
                 break;
-            case R.id.vancouver_button:
-                startActivity(new Intent(this, Vancouver.class));
-                break;
-            default:
+            case R.id.btnVancouver:
+                goVancouver();
                 break;
         }
     }
 
-    public void openSocialMain(View view) {
-        // 뒤로가기 버튼 클릭 시 호출되는 메소드입니다.
-        finish();
+    private void goVancouver() {
+        Intent i = new Intent(this, Vancouver.class);
+        startActivity(i);
+    }
+
+    private void goSeoul() {
+        Intent i = new Intent(this, Seoul.class);
+        startActivity(i);
+    }
+
+    private void goMoscow() {
+        Intent i = new Intent(this, Moscow.class);
+        startActivity(i);
     }
 }
-

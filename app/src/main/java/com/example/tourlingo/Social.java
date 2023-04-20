@@ -39,12 +39,12 @@ public class Social extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void goLocation() {
-        //Intent i = new Intent(this, LocationActivity.class);
-        //startActivity(i);
+        Intent i = new Intent(this, Location.class);
+        startActivity(i);
     }
 
     private void goBuddy() {
-        //Intent i = new Intent(this, BuddyActivity.class);
-        //startActivity(i);
+        Intent i = new Intent(this, Buddy.class);
+        startActivity(i);
     }
 }

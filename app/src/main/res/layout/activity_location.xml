@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Location">
 
-    <!-- text View -->
     <TextView
         android:id="@+id/tvLocationTitle"
         android:layout_width="match_parent"
@@ -19,7 +17,7 @@
         style="@style/heading_style"/>
 
     <ImageView
-        android:id="@+id/moscow_image"
+        android:id="@+id/imMoscow"
         android:layout_width="250dp"
         android:layout_height="150dp"
         android:src="@drawable/moscow"
@@ -29,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
-        android:id="@+id/moscow_button"
+        android:id="@+id/btnMoscow"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -39,24 +37,22 @@
         android:textColor="#FFFFFF"
         android:background="@drawable/button_selector"
         android:text="Moscow"
-        android:onClick="openLocationActivity"
-        app:layout_constraintTop_toBottomOf="@id/moscow_image"
+        app:layout_constraintTop_toBottomOf="@id/imMoscow"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/seoul_image"
+        android:id="@+id/imSeoul"
         android:layout_width="250dp"
         android:layout_height="150dp"
         android:src="@drawable/seoul"
         android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/moscow_button"
+        app:layout_constraintTop_toBottomOf="@id/btnMoscow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
-        android:id="@+id/seoul_button"
+        android:id="@+id/btnSeoul"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -66,24 +62,22 @@
         android:textColor="#FFFFFF"
         android:background="@drawable/button_selector"
         android:text="Seoul"
-        android:onClick="openLocationActivity"
-        app:layout_constraintTop_toBottomOf="@id/seoul_image"
+        app:layout_constraintTop_toBottomOf="@id/imSeoul"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/vancouver_image"
+        android:id="@+id/imVancouver"
         android:layout_width="250dp"
         android:layout_height="150dp"
         android:src="@drawable/vancouver"
         android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/seoul_button"
+        app:layout_constraintTop_toBottomOf="@id/btnSeoul"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
-        android:id="@+id/vancouver_button"
+        android:id="@+id/btnVancouver"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -93,33 +87,8 @@
         android:textColor="#FFFFFF"
         android:background="@drawable/button_selector"
         android:text="Vancouver"
-        android:onClick="openLocationActivity"
-        app:layout_constraintTop_toBottomOf="@id/vancouver_image"
+        app:layout_constraintTop_toBottomOf="@id/imVancouver"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"/>
-
-    <Button
-        android:id="@+id/btnReturn"
-        android:layout_width="27dp"
-        android:layout_height="27dp"
-        android:layout_marginLeft="24dp"
-        android:background="@drawable/back"
-        android:onClick="openSocialMain"
-        app:layout_constraintLeft_toRightOf="@id/vancouver_button"
-        tools:layout_editor_absoluteY="664dp"
-        tools:ignore="MissingConstraints" />
-
-
-    <!--<com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavView"
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav"
-        app:itemIconTint="#DC7B5C"
-        app:itemTextColor="#DC7B5C"/>-->
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
