@@ -2,6 +2,7 @@ package com.example.tourlingo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -38,8 +39,12 @@ public class Social extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void goLocation() {
+        //Intent i = new Intent(this, LocationActivity.class);
+        //startActivity(i);
     }
 
     private void goBuddy() {
+        //Intent i = new Intent(this, BuddyActivity.class);
+        //startActivity(i);
     }
 }
