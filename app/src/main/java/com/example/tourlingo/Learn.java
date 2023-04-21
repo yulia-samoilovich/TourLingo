@@ -44,30 +44,19 @@ public class Learn extends AppCompatActivity implements View.OnClickListener{
             case R.id.btnMatchP:
                 Intent i3 = new Intent(this, MatchPicture.class);
                 startActivity(i3);
+                break;
             case R.id.btnHome:
-                goHome();
+                Intent i4 = new Intent(this, Home.class);
+                startActivity(i4);
                 break;
             case R.id.btnProgress:
-                goProgress();
+                Intent i5 = new Intent(this, ProgressReview.class);
+                startActivity(i5);
                 break;
             case R.id.btnSocial:
-                goSocial();
+                Intent i6 = new Intent(this, Social.class);
+                startActivity(i6);
                 break;
         }
-    }
-
-    private void goHome() {
-        Intent i = new Intent(this, Home.class);
-        startActivity(i);
-    }
-
-    private void goProgress() {
-        Intent i = new Intent(this, ProgressReview.class);
-        startActivity(i);
-    }
-
-    private void goSocial() {
-        Intent i = new Intent(this, Social.class);
-        startActivity(i);
     }
 }

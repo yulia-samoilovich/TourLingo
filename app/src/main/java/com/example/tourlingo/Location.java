@@ -19,7 +19,6 @@ public class Location extends AppCompatActivity implements View.OnClickListener 
     Button btnSave, btnReturn;
     EditText edCountry, edDate, edComment;
     List<Country> countryList = new ArrayList<>();
-    ArrayAdapter<Country> countryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -13,7 +13,7 @@ import com.example.tourlingo.model.Country;
 import java.util.List;
 
 public class SelectedLocation extends AppCompatActivity implements View.OnClickListener {
-    Button btnModify, btnDelete;
+    Button btnModify, btnDelete, btnReturn;
     TextView tvCountry, tvComment, tvDate;
 
     @Override
@@ -31,6 +31,8 @@ public class SelectedLocation extends AppCompatActivity implements View.OnClickL
         tvDate = findViewById(R.id.tvDate);
         btnModify.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
+        btnReturn = findViewById(R.id.btnReturn);
+        btnReturn.setOnClickListener(this);
 
         getSocialInfo();
     }
@@ -56,6 +58,10 @@ public class SelectedLocation extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btnDelete:
                 deleteInfo();
+                break;
+            case R.id.btnReturn:
+                Intent i = new Intent(this, Social.class);
+                startActivity(i);
                 break;
         }
     }
