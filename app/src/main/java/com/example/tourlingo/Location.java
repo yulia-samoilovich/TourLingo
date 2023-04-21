@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class Location extends AppCompatActivity implements View.OnClickListener {
-    Button btnMoscow, btnSeoul, btnVancouver;
+    Button btnSave;
+    EditText edCountry, edDate, edComment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,12 +20,11 @@ public class Location extends AppCompatActivity implements View.OnClickListener 
     }
 
     private void initialize() {
-        btnMoscow = findViewById(R.id.btnMoscow);
-        btnMoscow.setOnClickListener(this);
-        btnSeoul = findViewById(R.id.btnSeoul);
-        btnSeoul.setOnClickListener(this);
-        btnVancouver = findViewById(R.id.btnVancouver);
-        btnVancouver.setOnClickListener(this);
+        btnSave = findViewById(R.id.btnSave);
+        btnSave.setOnClickListener(this);
+        edComment = findViewById(R.id.edCComment);
+        edCountry = findViewById(R.id.edCountry);
+        edDate = findViewById(R.id.edDate);
     }
 
     @Override
@@ -31,30 +32,15 @@ public class Location extends AppCompatActivity implements View.OnClickListener 
         int vId = view.getId();
 
         switch(vId){
-            case R.id.btnMoscow:
-                goMoscow();
-                break;
-            case R.id.btnSeoul:
-                goSeoul();
-                break;
-            case R.id.btnVancouver:
-                goVancouver();
+            case R.id.btnSave:
+                saveInfo();
                 break;
         }
     }
 
-    private void goVancouver() {
-        Intent i = new Intent(this, Vancouver.class);
+    private void saveInfo() {
+        Intent i = new Intent(this, SelectedLocation.class);
         startActivity(i);
     }
 
-    private void goSeoul() {
-        Intent i = new Intent(this, Seoul.class);
-        startActivity(i);
-    }
-
-    private void goMoscow() {
-        Intent i = new Intent(this, Moscow.class);
-        startActivity(i);
-    }
 }

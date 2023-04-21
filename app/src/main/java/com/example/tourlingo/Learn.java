@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class Learn extends AppCompatActivity implements View.OnClickListener{
-    Button btnArrange, btnTranslate, btnInsert, btnMatchT, btnMatchP;
+    Button btnTranslate, btnInsert, btnMatchT, btnMatchP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,12 +18,10 @@ public class Learn extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void initialize() {
-        btnArrange = findViewById(R.id.btnArrange);
         btnTranslate = findViewById(R.id.btnTranslate);
         btnInsert = findViewById(R.id.btnInsert);
         btnMatchT = findViewById(R.id.btnMatchT);
         btnMatchP = findViewById(R.id.btnMatchP);
-        btnArrange.setOnClickListener(this);
         btnTranslate.setOnClickListener(this);
         btnInsert.setOnClickListener(this);
         btnMatchT.setOnClickListener(this);
@@ -35,10 +33,6 @@ public class Learn extends AppCompatActivity implements View.OnClickListener{
         int btnId = view.getId();
 
         switch(btnId){
-            case R.id.btnArrange:
-                Intent i = new Intent(this, Arrange.class);
-                startActivity(i);
-                break;
             case R.id.btnTranslate:
                 Intent i2 = new Intent(this, Translate.class);
                 startActivity(i2);
