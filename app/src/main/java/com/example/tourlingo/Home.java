@@ -1,5 +1,6 @@
 package com.example.tourlingo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,14 +10,16 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.tourlingo.model.User;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.ktx.Firebase;
 
 public class Home extends AppCompatActivity implements View.OnClickListener{
     Button btnLearn, btnProgress, btnSocial;
     FirebaseUser user;
     FirebaseAuth auth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
