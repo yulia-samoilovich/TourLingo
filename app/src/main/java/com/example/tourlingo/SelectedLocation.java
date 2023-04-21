@@ -2,10 +2,15 @@ package com.example.tourlingo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.tourlingo.model.Country;
+
+import java.util.List;
 
 public class SelectedLocation extends AppCompatActivity implements View.OnClickListener {
     Button btnModify, btnDelete;
@@ -26,6 +31,19 @@ public class SelectedLocation extends AppCompatActivity implements View.OnClickL
         tvDate = findViewById(R.id.tvDate);
         btnModify.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
+
+        getSocialInfo();
+    }
+
+    private void getSocialInfo() {
+        Intent intent = getIntent();
+        String country = intent.getStringExtra("country");
+        String comment = intent.getStringExtra("comment");
+        String date = intent.getStringExtra("date");
+
+        tvCountry.setText(country);
+        tvComment.setText(comment);
+        tvDate.setText(date);
     }
 
     @Override
@@ -46,5 +64,6 @@ public class SelectedLocation extends AppCompatActivity implements View.OnClickL
     }
 
     private void modifyInfo() {
+        finish();
     }
 }
