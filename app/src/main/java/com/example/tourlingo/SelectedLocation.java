@@ -61,6 +61,9 @@ public class SelectedLocation extends AppCompatActivity implements View.OnClickL
     }
 
     private void deleteInfo() {
+        tvCountry.setText(null);
+        tvComment.setText(null);
+        tvDate.setText(null);
     }
 
     private void modifyInfo() {
