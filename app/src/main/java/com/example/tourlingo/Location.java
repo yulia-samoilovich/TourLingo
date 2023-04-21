@@ -32,6 +32,7 @@ public class Location extends AppCompatActivity implements View.OnClickListener 
         btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(this);
         btnReturn = findViewById(R.id.btnReturn);
+        btnReturn.setOnClickListener(this);
         edComment = findViewById(R.id.edComment);
         edCountry = findViewById(R.id.edCountry);
         edDate = findViewById(R.id.edDate);
